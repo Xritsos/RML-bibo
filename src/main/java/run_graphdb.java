@@ -53,29 +53,28 @@ public class run_graphdb {
 
         // Perform a SPARQL SELECT-query to retrieve books with averageRating > 3.0
         String queryString = "PREFIX bibo: <http://purl.org/ontology/bibo/> \n";
-        queryString += "PREFIX terms: <http://purl.org/dc/terms/> \n";
-        queryString += "PREFIX cu: <http://www.custom.org/ontology/> \n";
-        queryString += "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> \n";
+        queryString += "PREFIX terms: <http://purl.org/dc/terms/> \n";    // ontology used in bibo
+        queryString += "PREFIX cu: <http://www.custom.org/ontology/> \n"; // for our custom created properties
         queryString += "SELECT ?book ?title ?rating \n";
         queryString += "WHERE { \n";
         queryString += "    ?book a bibo:Book. \n";  // Match resources of type bibo:Book
         queryString += "    ?book terms:title ?title. \n";  // Match the title of the book
         queryString += "    ?book cu:averageRating ?rating. \n";  // Match the averageRating of the book
-        queryString += "    FILTER(xsd:float(?rating) > 3.0) \n";  // Filter books with averageRating > 3.0
+        queryString += "    FILTER(?rating > 3.0) \n";  // Filter books with averageRating > 3.0
         queryString += "}";
 
         TupleQuery query = connection.prepareTupleQuery(queryString);
 
         TupleQueryResult results = query.evaluate();
         // A QueryResult is also an AutoCloseable resource, so make sure it gets closed when done.
-//        try (TupleQueryResult result = query.evaluate()) {
+    // try (TupleQueryResult result = query.evaluate()) {
             // we just iterate over all solutions in the result...
         for (BindingSet result : results) {
             // ... and print out the value of the variable binding for ?s and ?n
             System.out.println("Title: " + result.getValue("title"));
             System.out.println("Rating: " + result.getValue("rating") + "\n");
         }
-//        }
+    // }
 
         connection.close();
         repository.shutDown();
