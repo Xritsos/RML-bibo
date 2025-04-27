@@ -5,6 +5,7 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix terms: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix custom: <http://www.custom.org/ontology/> .
 
 
@@ -21,36 +22,57 @@ custom:BookMapping a rr:TriplesMap;
 
     rr:predicateObjectMap [
         rr:predicate terms:title ;
-        rr:objectMap [ rml:reference "title" ]
+        rr:objectMap [
+            rml:reference "title" ;
+            rr:datatype xsd:string
+        ]
     ] ;
 
     rr:predicateObjectMap [
         rr:predicate bibo:isbn ;
-        rr:objectMap [ rml:reference "isbn" ]
+        rr:objectMap [
+            rml:reference "isbn" ;
+            rr:datatype xsd:int
+        ]
     ] ;
 
     rr:predicateObjectMap [
         rr:predicate bibo:isbn13 ;
-        rr:objectMap [ rml:reference "isbn13" ]
+        rr:objectMap [
+            rml:reference "isbn13";
+            rr:datatype xsd:int
+        ]
     ] ;
 
     rr:predicateObjectMap [
         rr:predicate custom:averageRating ;
-        rr:objectMap [ rml:reference "average_rating" ]
+        rr:objectMap [
+            rml:reference "average_rating" ;
+            rr:datatype xsd:float
+        ]
     ] ;
 
     rr:predicateObjectMap [
         rr:predicate custom:ratingsCount ;
-        rr:objectMap [ rml:reference "ratings_count" ]
+        rr:objectMap [
+            rml:reference "ratings_count";
+            rr:datatype xsd:int
+        ]
     ] ;
 
     rr:predicateObjectMap [
         rr:predicate custom:textReviewsCount ;
-        rr:objectMap [ rml:reference "text_reviews_count" ]
+        rr:objectMap [
+            rml:reference "text_reviews_count";
+            rr:datatype xsd:int
+        ]
     ] ;
 
     rr:predicateObjectMap [
         rr:predicate bibo:numPages ;
-        rr:objectMap [ rml:reference "num_pages" ]
+        rr:objectMap [
+            rml:reference "num_pages";
+            rr:datatype xsd:int
+        ]
     ] ;
 .
