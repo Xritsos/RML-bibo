@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Example1 {
+public class run_mapping {
 
     public static void main(String[] args) {
         String rootFolder = "./src/main/resources/";
