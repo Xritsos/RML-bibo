@@ -1,0 +1,57 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix ex: <http://example.org/schema#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+
+@prefix base: <file://C:/Users/kobec/Desktop/graphs_ontologies/rmlmapper-example-main/src/main/resources/bibo/bibo_modified.ttl#> .
+
+base:BookMapping a rr:TriplesMap;
+    rml:logicalSource [
+        rml:source "books.csv" ;
+        rml:referenceFormulation ql:CSV
+    ] ;
+
+    rr:subjectMap [
+        rr:template "http://example.org/book/{bookID}" ;
+        rr:class base:Book
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate base:title ;
+        rr:objectMap [ rml:reference "title" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate base:isbn ;
+        rr:objectMap [ rml:reference "isbn" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate base:isbn13 ;
+        rr:objectMap [ rml:reference "isbn13" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate base:averageRating ;
+        rr:objectMap [ rml:reference "average_rating" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate base:ratingsCount ;
+        rr:objectMap [ rml:reference "ratings_count" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate base:textReviewsCount ;
+        rr:objectMap [ rml:reference "text_reviews_count" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate base:numPages ;
+        rr:objectMap [ rml:reference "num_pages" ]
+    ] ;
+.
