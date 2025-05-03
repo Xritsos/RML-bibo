@@ -646,8 +646,7 @@ terms:language rdf:type owl:DatatypeProperty ;
 
 ###  http://purl.org/dc/terms/title
 terms:title rdf:type owl:DatatypeProperty ;
-            rdfs:domain bibo:Book ;
-            rdfs:range xsd:string .
+            rdfs:domain bibo:Book .
 
 
 ###  http://purl.org/ontology/bibo/abstract
@@ -1069,7 +1068,13 @@ foaf:givenname rdf:type owl:DatatypeProperty ;
 
 
 ###  http://xmlns.com/foaf/0.1/name
-foaf:name rdf:type owl:DatatypeProperty .
+foaf:name rdf:type owl:DatatypeProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( foaf:Organization
+                                      foaf:Person
+                                    )
+                      ] ;
+          rdfs:range xsd:string .
 
 
 #################################################################
