@@ -75,4 +75,47 @@ custom:BookMapping a rr:TriplesMap;
             rr:datatype xsd:int
         ]
     ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate terms:issued ;
+        rr:objectMap [
+            rml:reference "publication_date";
+            rr:datatype xsd:string
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate terms:language ;
+        rr:objectMap [
+            rml:reference "language_code";
+            rr:datatype xsd:string
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate terms:publisher ;
+        rr:objectMap [
+          rr:template "http://example.org/organization/{publisher}" ;
+        ]
+    ] ;
+.
+
+custom:OrgMapping a rr:TriplesMap;
+    rml:logicalSource [
+        rml:source "books.csv" ;
+        rml:referenceFormulation ql:CSV
+    ] ;
+
+    rr:subjectMap [
+        rr:template "http://example.org/organization/{publisher}" ;
+        rr:class foaf:Organization
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate foaf:name ;
+        rr:objectMap [
+            rml:reference "publisher";
+            rr:datatype xsd:string
+        ]
+    ] ;
 .
