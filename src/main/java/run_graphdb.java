@@ -31,8 +31,11 @@ public class run_graphdb {
             connection.add(run_graphdb.class.getResourceAsStream("/bibo/bibo_modified.ttl"), "urn:base",
                     RDFFormat.TURTLE);
 
-            // Adding the mappings file (adjust the path if necessary)
+            // Adding the mappings file (adjust the path if necessary) (without authors)
             connection.add(run_graphdb.class.getResourceAsStream("/bibo/results_1.ttl"), "urn:base", RDFFormat.TURTLE);
+
+            // Adding the mappings file (adjust the path if necessary) (with authors)
+            connection.add(run_graphdb.class.getResourceAsStream("/bibo/results_2.ttl"), "urn:base", RDFFormat.TURTLE);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,8 +57,9 @@ public class run_graphdb {
         // Perform a SPARQL SELECT-query to retrieve books with averageRating > 3.0
         String queryString = "PREFIX bibo: <http://purl.org/ontology/bibo/> \n";
         queryString += "PREFIX terms: <http://purl.org/dc/terms/> \n";    // ontology used in bibo
+        queryString += "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n";
         queryString += "PREFIX cu: <http://www.custom.org/ontology/> \n"; // for our custom created properties
-        queryString += "SELECT ?book ?title ?rating ?date ?lang ?publ\n";
+        queryString += "SELECT ?book ?title ?rating ?date ?lang ?publ ?auth_name\n";
         queryString += "WHERE { \n";
         queryString += "    ?book a bibo:Book. \n";  // Match resources of type bibo:Book
         queryString += "    ?book terms:title ?title. \n";  // Match the title of the book
@@ -63,6 +67,8 @@ public class run_graphdb {
         queryString += "    ?book terms:issued ?date. \n";
         queryString += "    ?book terms:language ?lang. \n";
         queryString += "    ?book terms:publisher ?publ. \n";
+        queryString += "    ?book terms:creator ?auth. \n";
+        queryString += "    ?auth foaf:name ?auth_name. \n";
         queryString += "    FILTER(?date='9/16/2006') \n";  // Filter books with averageRating > 3.0
         queryString += "}";
 
@@ -78,6 +84,7 @@ public class run_graphdb {
             System.out.println("Rating: " + result.getValue("rating") + "\n");
             System.out.println("Language: " + result.getValue("lang") + "\n");
             System.out.println("hasPublisher: " + result.getValue("publ") + "\n");
+            System.out.println("hascreator(s): " + result.getValue("auth_name") + "\n");
         }
     // }
 
