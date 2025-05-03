@@ -55,12 +55,15 @@ public class run_graphdb {
         String queryString = "PREFIX bibo: <http://purl.org/ontology/bibo/> \n";
         queryString += "PREFIX terms: <http://purl.org/dc/terms/> \n";    // ontology used in bibo
         queryString += "PREFIX cu: <http://www.custom.org/ontology/> \n"; // for our custom created properties
-        queryString += "SELECT ?book ?title ?rating \n";
+        queryString += "SELECT ?book ?title ?rating ?date ?lang ?publ\n";
         queryString += "WHERE { \n";
         queryString += "    ?book a bibo:Book. \n";  // Match resources of type bibo:Book
         queryString += "    ?book terms:title ?title. \n";  // Match the title of the book
         queryString += "    ?book cu:averageRating ?rating. \n";  // Match the averageRating of the book
-        queryString += "    FILTER(?rating > 3.0) \n";  // Filter books with averageRating > 3.0
+        queryString += "    ?book terms:issued ?date. \n";
+        queryString += "    ?book terms:language ?lang. \n";
+        queryString += "    ?book terms:publisher ?publ. \n";
+        queryString += "    FILTER(?date='9/16/2006') \n";  // Filter books with averageRating > 3.0
         queryString += "}";
 
         TupleQuery query = connection.prepareTupleQuery(queryString);
@@ -73,6 +76,8 @@ public class run_graphdb {
             // ... and print out the value of the variable binding for ?s and ?n
             System.out.println("Title: " + result.getValue("title"));
             System.out.println("Rating: " + result.getValue("rating") + "\n");
+            System.out.println("Language: " + result.getValue("lang") + "\n");
+            System.out.println("hasPublisher: " + result.getValue("publ") + "\n");
         }
     // }
 
