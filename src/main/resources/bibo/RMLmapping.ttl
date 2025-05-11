@@ -77,14 +77,6 @@ custom:BookMapping a rr:TriplesMap;
     ] ;
 
     rr:predicateObjectMap [
-        rr:predicate terms:issued ;
-        rr:objectMap [
-            rml:reference "publication_date";
-            rr:datatype xsd:string
-        ]
-    ] ;
-
-    rr:predicateObjectMap [
         rr:predicate terms:language ;
         rr:objectMap [
             rml:reference "language_code";
