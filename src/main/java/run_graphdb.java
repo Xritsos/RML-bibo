@@ -2,6 +2,7 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.query.BindingSet;
+import org.eclipse.rdf4j.query.QueryLanguage;
 import org.eclipse.rdf4j.query.TupleQuery;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
@@ -59,6 +60,7 @@ public class run_graphdb {
         queryString += "PREFIX terms: <http://purl.org/dc/terms/> \n";    // ontology used in bibo
         queryString += "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n";
         queryString += "PREFIX cu: <http://www.custom.org/ontology/> \n"; // for our custom created properties
+        queryString += "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> \n";
         queryString += "SELECT ?book ?title ?rating ?date ?lang ?publ ?auth_name\n";
         queryString += "WHERE { \n";
         queryString += "    ?book a bibo:Book. \n";  // Match resources of type bibo:Book
@@ -69,10 +71,10 @@ public class run_graphdb {
         queryString += "    ?book terms:publisher ?publ. \n";
         queryString += "    ?book terms:creator ?auth. \n";
         queryString += "    ?auth foaf:name ?auth_name. \n";
-        queryString += "    FILTER(?date='9/16/2006') \n";  // Filter books with averageRating > 3.0
+        queryString += "    FILTER(?date='2006-09-16T00:00:00'^^xsd:dateTime) \n";  // Filter books with averageRating > 3.0
         queryString += "}";
 
-        TupleQuery query = connection.prepareTupleQuery(queryString);
+        TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
 
         TupleQueryResult results = query.evaluate();
         // A QueryResult is also an AutoCloseable resource, so make sure it gets closed when done.
@@ -80,8 +82,10 @@ public class run_graphdb {
             // we just iterate over all solutions in the result...
         for (BindingSet result : results) {
             // ... and print out the value of the variable binding for ?s and ?n
-            System.out.println("Title: " + result.getValue("title"));
+            System.out.println("Book URI: " + result.getValue("book") + "\n");
+            System.out.println("Title: " + result.getValue("title") + "\n");
             System.out.println("Rating: " + result.getValue("rating") + "\n");
+            System.out.println("Issued Date: " + result.getValue("date") + "\n");
             System.out.println("Language: " + result.getValue("lang") + "\n");
             System.out.println("hasPublisher: " + result.getValue("publ") + "\n");
             System.out.println("hascreator(s): " + result.getValue("auth_name") + "\n");
