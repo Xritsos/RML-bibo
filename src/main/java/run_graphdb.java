@@ -56,23 +56,24 @@ public class run_graphdb {
 //        connection.commit();
 
         // Perform a SPARQL SELECT-query to retrieve books with averageRating > 3.0
-        String queryString = "PREFIX bibo: <http://purl.org/ontology/bibo/> \n";
-        queryString += "PREFIX terms: <http://purl.org/dc/terms/> \n";    // ontology used in bibo
-        queryString += "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n";
-        queryString += "PREFIX cu: <http://www.custom.org/ontology/> \n"; // for our custom created properties
-        queryString += "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> \n";
-        queryString += "SELECT ?book ?title ?rating ?date ?lang ?publ ?auth_name\n";
-        queryString += "WHERE { \n";
-        queryString += "    ?book a bibo:Book. \n";  // Match resources of type bibo:Book
-        queryString += "    ?book terms:title ?title. \n";  // Match the title of the book
-        queryString += "    ?book cu:averageRating ?rating. \n";  // Match the averageRating of the book
-        queryString += "    ?book terms:issued ?date. \n";
-        queryString += "    ?book terms:language ?lang. \n";
-        queryString += "    ?book terms:publisher ?publ. \n";
-        queryString += "    ?book terms:creator ?auth. \n";
-        queryString += "    ?auth foaf:name ?auth_name. \n";
-        queryString += "    FILTER(?date='2006-09-16T00:00:00'^^xsd:dateTime) \n";  // Filter books with averageRating > 3.0
-        queryString += "}";
+        String queryString =
+            "PREFIX bibo: <http://purl.org/ontology/bibo/>\n" +
+            "PREFIX terms: <http://purl.org/dc/terms/>\n" +
+            "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
+            "PREFIX cu: <http://www.custom.org/ontology/>\n" +
+            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+            "SELECT ?book ?title ?rating ?date ?lang ?publ ?auth_name\n" +
+            "WHERE {\n" +
+            "    ?book a bibo:Book.\n" +
+            "    ?book terms:title ?title.\n" +
+            "    ?book cu:averageRating ?rating.\n" +
+            "    ?book terms:issued ?date.\n" +
+            "    ?book terms:language ?lang.\n" +
+            "    ?book terms:publisher ?publ.\n" +
+            "    ?book terms:creator ?auth.\n" +
+            "    ?auth foaf:name ?auth_name.\n" +
+            "    FILTER (?date = '2006-09-16T00:00:00'^^xsd:dateTime)\n" +
+            "}";
 
         TupleQuery query = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
 
