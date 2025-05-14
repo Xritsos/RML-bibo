@@ -1,0 +1,11 @@
+1) verify data/object properties
+2) verify domain/range of properties
+3) Failed to parse date error (run_extra_mapping)
+4) Write 4 complex queries
+5) Sanity checks
+	* does number of instances match the number of books in the dataset?
+	* in GraphDB run reasoning and check whether something assigned to something
+	that it shouldn't or should but didn't
+	
+5) Write report
+6) Create presentation ppt
