@@ -68,7 +68,7 @@ public class run_extra_mapping {
                 Rio.write(model, out, RDFFormat.TURTLE);
             }
 
-            System.out.println("RDF mapping complete: books_output.ttl");
+            System.out.println("RDF mapping complete: src/main/resources/bibo/results_2.ttl");
 
         } catch (IOException e) {
             e.printStackTrace();
