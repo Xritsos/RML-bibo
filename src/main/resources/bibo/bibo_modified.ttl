@@ -1746,27 +1746,7 @@ foaf:Person rdf:type owl:Class ;
 #################################################################
 
 ###  http://purl.org/ontology/bibo/
-<http://purl.org/ontology/bibo/> rdf:type owl:NamedIndividual ;
-                                 terms:creator bibo:bdarcus ,
-                                               bibo:fgiasson .
-
-
-###  http://purl.org/ontology/bibo/bdarcus
-bibo:bdarcus rdf:type owl:NamedIndividual ,
-                      owl:Thing ,
-                      foaf:Person ;
-             foaf:name "Bruce D'Arcus" ;
-             rdfs:isDefinedBy "http://purl.org/ontology/bibo/"^^xsd:anyURI ;
-             rdfs:seeAlso "http://purl.org/net/darcusb/info#me"^^xsd:anyURI .
-
-
-###  http://purl.org/ontology/bibo/fgiasson
-bibo:fgiasson rdf:type owl:NamedIndividual ,
-                       owl:Thing ,
-                       foaf:Person ;
-              foaf:name "Frederick Giasson" ;
-              rdfs:isDefinedBy "http://purl.org/ontology/bibo/"^^xsd:anyURI ;
-              rdfs:seeAlso "http://fgiasson.com/me/"^^xsd:anyURI .
+<http://purl.org/ontology/bibo/> rdf:type owl:NamedIndividual .
 
 
 ###  http://purl.org/ontology/bibo/degrees/ma
