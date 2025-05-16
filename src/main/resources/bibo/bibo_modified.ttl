@@ -12,6 +12,7 @@
 @prefix event: <http://purl.org/NET/c4dm/event.owl#> .
 @prefix prism: <http://prismstandard.org/namespaces/1.2/basic/> .
 @prefix terms: <http://purl.org/dc/terms/> .
+@prefix custom: <http://www.custom.org/ontology/> .
 @prefix schema: <http://schemas.talis.com/2005/address/schema#> .
 @prefix status: <http://purl.org/ontology/bibo/status/> .
 @prefix degrees: <http://purl.org/ontology/bibo/degrees/> .
@@ -793,11 +794,7 @@ bibo:isbn10 rdf:type owl:DatatypeProperty ;
 ###  http://purl.org/ontology/bibo/isbn13
 bibo:isbn13 rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf bibo:isbn ;
-            rdfs:domain [ rdf:type owl:Class ;
-                          owl:unionOf ( bibo:Collection
-                                        bibo:Document
-                                      )
-                        ] ;
+            rdfs:domain bibo:Book ;
             rdfs:range xsd:integer .
 
 
@@ -1029,21 +1026,21 @@ schema:localityName rdf:type owl:DatatypeProperty ;
 
 
 ###  http://www.custom.org/ontology/averageRating
-<http://www.custom.org/ontology/averageRating> rdf:type owl:DatatypeProperty ;
-                                               rdfs:domain bibo:Book ;
-                                               rdfs:range xsd:float .
+custom:averageRating rdf:type owl:DatatypeProperty ;
+                     rdfs:domain bibo:Book ;
+                     rdfs:range xsd:float .
 
 
 ###  http://www.custom.org/ontology/ratingsCount
-<http://www.custom.org/ontology/ratingsCount> rdf:type owl:DatatypeProperty ;
-                                              rdfs:domain bibo:Book ;
-                                              rdfs:range xsd:integer .
+custom:ratingsCount rdf:type owl:DatatypeProperty ;
+                    rdfs:domain bibo:Book ;
+                    rdfs:range xsd:integer .
 
 
 ###  http://www.custom.org/ontology/textReviewsCount
-<http://www.custom.org/ontology/textReviewsCount> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:domain bibo:Book ;
-                                                  rdfs:range xsd:integer .
+custom:textReviewsCount rdf:type owl:DatatypeProperty ;
+                        rdfs:domain bibo:Book ;
+                        rdfs:range xsd:integer .
 
 
 ###  http://xmlns.com/foaf/0.1/family_name
