@@ -35,6 +35,7 @@ public class run_extra_mapping {
                 String bookID = fields[0].trim();
                 String authorsRaw = fields[2].trim();
                 String pubDateRaw = fields[10].trim();
+                String publishersRaw = fields[11].trim();
 
                 // Create Book IRI using bookID
                 IRI bookIRI = vf.createIRI(baseURI, "book/" + bookID);
@@ -51,6 +52,13 @@ public class run_extra_mapping {
                     model.add(personIRI, vf.createIRI("http://xmlns.com/foaf/0.1/name"), vf.createLiteral(name));
                     model.add(bookIRI, vf.createIRI("http://purl.org/dc/terms/creator"), personIRI);
                 }
+
+                // Process Publishing Organizations
+                String pubId = publishersRaw.toLowerCase().replaceAll("[^a-z0-9]", "_");
+                IRI pubIRI = vf.createIRI(baseURI, "organization/" + pubId);
+                model.add(pubIRI, RDF.TYPE, vf.createIRI("http://xmlns.com/foaf/0.1/Organization"));
+                model.add(pubIRI, vf.createIRI("http://xmlns.com/foaf/0.1/name"), vf.createLiteral(publishersRaw));
+                model.add(bookIRI, vf.createIRI("http://purl.org/dc/terms/publisher"), pubIRI);
 
                 // Convert and add publication date
                 try {
