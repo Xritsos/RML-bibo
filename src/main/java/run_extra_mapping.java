@@ -33,9 +33,18 @@ public class run_extra_mapping {
                 if (fields.length < 12) continue;
 
                 String bookID = fields[0].trim();
-                String authorsRaw = fields[2].trim();
-                String pubDateRaw = fields[10].trim();
-                String publishersRaw = fields[11].trim();
+                String authorsRaw;
+                String pubDateRaw;
+                String publishersRaw;
+                if (fields.length > 12) {
+                    authorsRaw = fields[2].trim() + " " + fields[3].trim();
+                    pubDateRaw = fields[11].trim();
+                    publishersRaw = fields[12].trim();
+                } else {
+                    authorsRaw = fields[2].trim();
+                    pubDateRaw = fields[10].trim();
+                    publishersRaw = fields[11].trim();
+                }
 
                 // Create Book IRI using bookID
                 IRI bookIRI = vf.createIRI(baseURI, "book/" + bookID);
@@ -67,7 +76,8 @@ public class run_extra_mapping {
                     Literal dateLiteral = vf.createLiteral(isoDate, XSD.DATETIME);
                     model.add(bookIRI, DCTERMS.ISSUED, dateLiteral);
                 } catch (ParseException e) {
-                    System.err.println("Failed to parse date: " + pubDateRaw);
+                    System.err.println("Failed to parse date: " + pubDateRaw + "for book: " + bookID);
+                    System.err.println("Error: " + e);
                 }
             }
 
