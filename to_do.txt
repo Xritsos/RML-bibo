@@ -1,9 +1,14 @@
-1) Failed to parse date error (run_extra_mapping)
-2) Write 4 complex queries
-3) Sanity checks
+1) Sanity checks
 	* does number of instances match the number of books in the dataset?
 	* in GraphDB run reasoning and check whether something assigned to something
 	that it shouldn't or should but didn't
 	
-4) Write report
-5) Create presentation ppt
+2) Finalize report
+3) Add queries/results on code
+4) Clear code
+5) Add README documentation
+6) Make repo public
+7) Put repo in report
+8) Download zip file of the repo and deliver
+9) Create presentation ppt
+10) Delete this file
