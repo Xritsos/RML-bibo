@@ -1,0 +1,19 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX terms: <http://purl.org/dc/terms/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+SELECT ?publisherName ?topAuthor (COUNT(DISTINCT ?title) AS ?uniqueBooks)
+WHERE {
+  ?book a bibo:Book ;
+    	terms:language ?lang ;
+    	terms:title ?title ;
+    	terms:publisher ?pub ;
+    	terms:creator ?creator .
+  ?pub foaf:name ?publisherName .
+  ?creator foaf:name ?topAuthor .
+
+  FILTER(CONTAINS(LCASE(?lang), "en"))
+}
+GROUP BY ?publisherName ?topAuthor
+HAVING (COUNT(DISTINCT ?title) >= 5)
+ORDER BY DESC(?uniqueBooks)
+LIMIT 5

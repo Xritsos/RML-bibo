@@ -1,0 +1,23 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX terms: <http://purl.org/dc/terms/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?decade ?author (COUNT(DISTINCT ?title) AS ?numUniqueTitles)
+WHERE {
+  ?book a bibo:Book ;
+    	terms:title ?title ;
+    	terms:creator ?creator ;
+    	terms:language ?lang ;
+    	terms:issued ?date .
+  ?creator foaf:name ?author .
+
+  FILTER(CONTAINS(LCASE(?lang), "en"))
+
+  BIND(xsd:integer(SUBSTR(STR(?date), 1, 4)) AS ?year)
+  BIND(FLOOR(?year / 10) * 10 AS ?decadeNum)
+  BIND(CONCAT(STR(?decadeNum), "s") AS ?decade)
+}
+GROUP BY ?decade ?author
+HAVING (COUNT(DISTINCT ?title) >= 25)
+ORDER BY DESC(?numUniqueTitles)
+LIMIT 5

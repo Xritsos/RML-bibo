@@ -1,0 +1,20 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX terms: <http://purl.org/dc/terms/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX cu: <http://www.custom.org/ontology/>
+SELECT ?title ?author
+WHERE {
+	?book a bibo:Book ;
+    	cu:averageRating ?rating ;
+    	cu:ratingsCount ?count ;
+    	cu:textReviewsCount ?texts ;
+    	terms:title ?title ;
+    	terms:creator ?creator .
+	?creator foaf:name ?author .
+	FILTER(
+    	?rating > 4.5 &&
+    	?count > 20000 &&
+    	?texts > 1000
+	)
+}
+LIMIT 5

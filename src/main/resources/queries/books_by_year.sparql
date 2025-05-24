@@ -1,0 +1,16 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX terms: <http://purl.org/dc/terms/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?title ?date ?publisher
+WHERE {
+	?book a bibo:Book ;
+    	terms:title ?title ;
+    	terms:issued ?date ;
+    	terms:publisher ?pub .
+	?pub foaf:name ?publisher .
+	BIND(xsd:integer(SUBSTR(STR(?date), 1, 4)) AS ?year)
+	FILTER(?year > 1900 && ?year <=1920)
+}
+ORDER BY ?year
+LIMIT 5

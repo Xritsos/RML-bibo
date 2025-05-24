@@ -1,0 +1,14 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX terms: <http://purl.org/dc/terms/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+SELECT ?publisher (COUNT(?book) AS ?numBooks) (MAX(?npages) AS ?maxPages)
+WHERE {
+	?book a bibo:Book ;
+    	bibo:numPages ?npages ;
+    	terms:publisher ?pub .
+	?pub foaf:name ?publisher .
+	FILTER(?npages > 500)
+}
+GROUP BY ?publisher
+ORDER BY DESC(?numBooks)
+LIMIT 5

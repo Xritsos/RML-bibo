@@ -1,0 +1,23 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX terms: <http://purl.org/dc/terms/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX cu: <http://www.custom.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?publisherName (AVG(?rating) AS ?avgRating) (COUNT(DISTINCT ?title) AS ?numTitles)
+WHERE {
+  ?book a bibo:Book ;
+    	terms:language ?lang ;
+    	cu:averageRating ?rating ;
+    	cu:textReviewsCount ?reviews ;
+    	terms:title ?title ;
+    	terms:publisher ?pub .
+
+  ?pub foaf:name ?publisherName .
+
+  FILTER(CONTAINS(LCASE(?lang), "en"))
+  FILTER(?reviews > 1000)
+}
+GROUP BY ?publisherName
+HAVING(COUNT(DISTINCT ?title) >= 5)
+ORDER BY DESC(?avgRating)
+LIMIT 5
