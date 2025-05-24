@@ -1,14 +1,11 @@
-1) Sanity checks
-	* does number of instances match the number of books in the dataset?
+1) Sanity checks (Christos)
 	* in GraphDB run reasoning and check whether something assigned to something
 	that it shouldn't or should but didn't
 	
-2) Finalize report
-3) Add queries/results on code
-4) Clear code
-5) Add README documentation
-6) Make repo public
-7) Put repo in report
+2) Finalize report - query/result (Theano)
+4) Clear code (Christos)
+5) Add README documentation (last)
+10) Delete this file (Christos)
 8) Download zip file of the repo and deliver
-9) Create presentation ppt
-10) Delete this file
+9) Create presentation ppt (Christos)
+    * make drawio if Protege fails
