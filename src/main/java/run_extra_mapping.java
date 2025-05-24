@@ -1,7 +1,6 @@
 import org.eclipse.rdf4j.model.*;
 import org.eclipse.rdf4j.model.impl.LinkedHashModel;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
-import org.eclipse.rdf4j.model.util.Values;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.eclipse.rdf4j.model.vocabulary.XSD;
@@ -9,7 +8,6 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
 import java.io.*;
-import java.util.UUID;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +19,7 @@ public class run_extra_mapping {
         String baseURI = "http://example.org/";
         Model model = new LinkedHashModel();
 
+        // convert date format to match xsd:dateTime
         ValueFactory vf = SimpleValueFactory.getInstance();
         SimpleDateFormat inputFormat = new SimpleDateFormat("M/d/yyyy");
         SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -53,7 +52,7 @@ public class run_extra_mapping {
                     model.add(bookIRI, vf.createIRI("http://purl.org/dc/terms/creator"), personIRI);
                 }
 
-                // Process Publishing Organizations
+                // Process Publishing Organizations (due to strange characters occurring)
                 String pubId = publishersRaw.toLowerCase().replaceAll("[^a-z0-9]", "_");
                 IRI pubIRI = vf.createIRI(baseURI, "organization/" + pubId);
                 model.add(pubIRI, RDF.TYPE, vf.createIRI("http://xmlns.com/foaf/0.1/Organization"));
