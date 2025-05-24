@@ -1,7 +1,3 @@
-1) Sanity checks (Christos)
-	* in GraphDB run reasoning and check whether something assigned to something
-	that it shouldn't or should but didn't
-	
 2) Finalize report - query/result (Theano)
 4) Clear code (Christos)
 5) Add README documentation (last)
