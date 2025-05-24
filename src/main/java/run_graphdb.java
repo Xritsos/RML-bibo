@@ -23,14 +23,14 @@ public class run_graphdb {
             // Load ontology and mappings
             connection.begin();
             try {
-                connection.add(run_graphdb0.class.getResourceAsStream("/bibo/bibo_modified.ttl"), "urn:base",
+                connection.add(run_graphdb.class.getResourceAsStream("/bibo/bibo_modified.ttl"), "urn:base",
                         RDFFormat.TURTLE);
 
                 // Adding the mappings file (adjust the path if necessary) (without authors/publishers)
-                connection.add(run_graphdb0.class.getResourceAsStream("/bibo/results_1.ttl"), "urn:base", RDFFormat.TURTLE);
+                connection.add(run_graphdb.class.getResourceAsStream("/bibo/results_1.ttl"), "urn:base", RDFFormat.TURTLE);
 
                 // Adding the mappings file (adjust the path if necessary) (with authors/publishers)
-                connection.add(run_graphdb0.class.getResourceAsStream("/bibo/results_2.ttl"), "urn:base", RDFFormat.TURTLE);
+                connection.add(run_graphdb.class.getResourceAsStream("/bibo/results_2.ttl"), "urn:base", RDFFormat.TURTLE);
             } catch (IOException e) {
                 e.printStackTrace();
             }
