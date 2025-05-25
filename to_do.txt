@@ -1,7 +1,0 @@
-2) Finalize report - query/result (Theano)
-4) Clear code (Christos)
-5) Add README documentation (last)
-10) Delete this file (Christos)
-8) Download zip file of the repo and deliver
-9) Create presentation ppt (Christos)
-    * make drawio if Protege fails
