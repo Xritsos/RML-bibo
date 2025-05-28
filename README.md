@@ -25,7 +25,7 @@ The FOAF ontology (http://xmlns.com/foaf/0.1/) is designed to describe people, t
 A custom ontology was created for properties not covered by the existing vocabularies. It was namespaced as custom: http://www.custom.org/ontology/.
 
 
-![ontology schema](https://github.com/user-attachments/assets/b691e6ef-e008-4489-9aea-e91250768903)
+![ontology schema](https://github.com/user-attachments/assets/533bf18d-823b-4c83-acf2-ec99031562bd)
 
 
 # Methodology
